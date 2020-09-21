@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'slack-post', path: './slack-post/'
-gem 'twitter'
-gem 'json'
+gem "slack-post", path: "./slack-post/"
+gem "twitter"
+gem "json"
+gem "rufo"

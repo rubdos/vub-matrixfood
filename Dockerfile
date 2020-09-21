@@ -8,4 +8,4 @@ ADD . /app
 WORKDIR /app
 RUN gem install bundler ; bundle install
 
-ENTRYPOINT ["bundle", "exec", "ruby", "slackfood.rb"]
+ENTRYPOINT ["bundle", "exec", "ruby", "slackfood-evening.rb"]
