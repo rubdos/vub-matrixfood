@@ -62,7 +62,6 @@ def postit(data, location)
       line = " • *#{dish["name"]}* : #{dish["dish"]}\n"
       lines.push(line)
     end
-
     Slack::Post.post lines.join(TUSSENFIX), CHANNEL
     return
   end
