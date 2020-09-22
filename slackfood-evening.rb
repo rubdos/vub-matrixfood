@@ -57,7 +57,7 @@ def postit(data, location)
     until items.empty?
       dish = items.shift
 
-      line = " • *#{dish["name"]}* : #{dish["dish"]}\n"
+      line = "<em>#{dish["name"]}</em>: #{dish["dish"]}\n"
       lines.push(line)
     end
     channel.send_text lines.join(TUSSENFIX)
