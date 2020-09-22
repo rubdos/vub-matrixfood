@@ -1,0 +1,36 @@
+stages:
+  - build
+
+.kaniko: &kaniko
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  cache:
+    key: docker
+  stage: build
+  before_script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - echo "Working around https://github.com/GoogleContainerTools/kaniko/issues/595"
+    - rm -f $CONTEXT_DIR/.dockerignore
+  script:
+    - echo creating $CI_REGISTRY/vub-matrixfood:$CI_PIPELINE_IID
+    - echo creating $CI_REGISTRY/vub-matrixfood:$IMAGE_TAG
+    - /kaniko/executor --context $CI_PROJECT_DIR
+      --dockerfile $CI_PROJECT_DIR/Dockerfile
+      --destination $CI_REGISTRY/vub-matrixfood:$CI_PIPELINE_IID
+      --destination $CI_REGISTRY/vub-matrixfood:$IMAGE_TAG
+      --cache=true
+
+build:canvas-sync:production:
+  <<: *kaniko
+  only:
+    - master
+  variables: &production-vars
+    IMAGE_TAG: latest
+
+build:canvas-sync:review:
+  <<: *kaniko
+  except:
+    - master
+  variables: &production-vars
+    IMAGE_TAG: review-$CI_COMMIT_REF_SLUG
