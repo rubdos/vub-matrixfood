@@ -7,5 +7,3 @@ ADD . /app
 # Install requirements
 WORKDIR /app
 RUN gem install bundler ; bundle install
-
-ENTRYPOINT ["bundle", "exec", "ruby", "slackfood-evening.rb"]
