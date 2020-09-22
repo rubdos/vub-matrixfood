@@ -48,7 +48,7 @@ def postit(data, location)
       lines.push(line)
     end
 
-    channel.send_text lines.join(TUSSENFIX)
+    channel.send_html lines.join(TUSSENFIX)
     return
   end
 end

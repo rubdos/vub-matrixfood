@@ -60,7 +60,7 @@ def postit(data, location)
       line = "<em>#{dish["name"]}</em>: #{dish["dish"]}\n"
       lines.push(line)
     end
-    channel.send_text lines.join(TUSSENFIX)
+    channel.send_html lines.join(TUSSENFIX)
     return
   end
 end
