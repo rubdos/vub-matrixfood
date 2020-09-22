@@ -13,12 +13,12 @@ stages:
     - echo "Working around https://github.com/GoogleContainerTools/kaniko/issues/595"
     - rm -f $CONTEXT_DIR/.dockerignore
   script:
-    - echo creating $CI_REGISTRY/vub-matrixfood:$CI_PIPELINE_IID
-    - echo creating $CI_REGISTRY/vub-matrixfood:$IMAGE_TAG
+    - echo creating $CI_REGISTRY/rubdos/vub-matrixfood:$CI_PIPELINE_IID
+    - echo creating $CI_REGISTRY/rubdos/vub-matrixfood:$IMAGE_TAG
     - /kaniko/executor --context $CI_PROJECT_DIR
       --dockerfile $CI_PROJECT_DIR/Dockerfile
-      --destination $CI_REGISTRY/vub-matrixfood:$CI_PIPELINE_IID
-      --destination $CI_REGISTRY/vub-matrixfood:$IMAGE_TAG
+      --destination $CI_REGISTRY/rubdos/vub-matrixfood:$CI_PIPELINE_IID
+      --destination $CI_REGISTRY/rubdos/vub-matrixfood:$IMAGE_TAG
       --cache=true
 
 build:canvas-sync:production:
