@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
+
 require "rubygems"
 require "net/http"
 require "pp"
@@ -12,6 +14,19 @@ require "matrix_sdk"
 VUB_RESTO_URL = URI("https://call-cc.be/files/vub-resto/etterbeek.en.json")
 
 TUSSENFIX = "<br />"
+
+EMOJI = {
+  "Soup" => "🥣",
+  "Soep" => "🥣",
+  "Menu 1" => "🍲",
+  "Menu 2" => "🍳",
+  "Veggie" => "🥗",
+  "Fish" => "🐟",
+  "Vis" => "🐟",
+  "Pasta" => "🍝",
+  "Wok" => "🥢",
+}
+EMOJI.default = "🥙"
 
 def get_JSON()
   res = nil
@@ -44,7 +59,7 @@ def postit(data, location)
     until items.empty?
       dish = items.shift
 
-      line = "<em>#{dish["name"]}</em>: #{dish["dish"]}\n"
+      line = "<em>#{EMOJI[dish["name"]]} #{dish["name"]}</em>: #{dish["dish"]}\n"
       lines.push(line)
     end
 
