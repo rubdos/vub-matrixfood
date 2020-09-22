@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "slack-post", path: "./slack-post/"
+gem "matrix_sdk"
 gem "twitter"
 gem "json"
 gem "rufo"

@@ -7,18 +7,11 @@ require "time"
 require "cgi"
 
 require "json"
-require "slack/post"
+require "matrix_sdk"
 
 VUB_RESTO_URL = URI("https://call-cc.be/files/vub-resto/etterbeek.en.json")
 
 TUSSENFIX = " "
-CHANNEL = ENV["CHANNEL"]
-
-Slack::Post.configure(
-  subdomain: ENV["SUBDOMAIN"],
-  token: ENV["TOKEN"],
-  username: ENV["USERNAME"],
-)
 
 def get_JSON()
   res = nil
@@ -34,6 +27,11 @@ def get_JSON()
 end
 
 def postit(data, location)
+  client = MatrixSdk::Client.new ENV["HOST"]
+  client.login ENV["USERNAME"], ENV["PASSWORD"]
+
+  channel = client.find_room ENV["CHANNEL"]
+
   vandaag = Date.today
   dagstr = vandaag.strftime("%F")
   parsed_data = JSON.parse(data)
@@ -50,7 +48,7 @@ def postit(data, location)
       lines.push(line)
     end
 
-    Slack::Post.post lines.join(TUSSENFIX), CHANNEL
+    channel.send_text lines.join(TUSSENFIX)
     return
   end
 end
