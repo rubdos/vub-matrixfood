@@ -11,7 +11,7 @@ require "matrix_sdk"
 
 VUB_RESTO_URL = URI("https://call-cc.be/files/vub-resto/v2/etterbeek.en.json")
 
-TUSSENFIX = " "
+TUSSENFIX = "<br />"
 
 def get_JSON()
   res = nil
