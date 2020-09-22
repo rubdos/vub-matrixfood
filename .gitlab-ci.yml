@@ -21,14 +21,14 @@ stages:
       --destination $CI_REGISTRY/rubdos/vub-matrixfood:$IMAGE_TAG
       --cache=true
 
-build:canvas-sync:production:
+build:docker:production:
   <<: *kaniko
   only:
     - master
   variables: &production-vars
     IMAGE_TAG: latest
 
-build:canvas-sync:review:
+build:docker:review:
   <<: *kaniko
   except:
     - master
